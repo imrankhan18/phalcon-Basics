@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
 public function indexAction()
 {
-    $this->view->users = Users::find();     
+    $this->view->users = Users::find();   
 }
 public function adminProfieAction()
 {

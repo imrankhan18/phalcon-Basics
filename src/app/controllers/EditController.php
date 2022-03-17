@@ -7,5 +7,7 @@ public function editAction($id)
 {
     $this->view->userid=$id;
 }
+
+
 }
 ?>

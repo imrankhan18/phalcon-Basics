@@ -27,4 +27,11 @@ class IndexController extends Controller
         $result= $user->delete();
         $this->response->redirect('index');
 }
+public function approveAction($id)
+{
+
+    $approve= Users::findFirstById($id);
+    
+   
+}
 }

@@ -87,6 +87,12 @@
                   Add Blog
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="blogpage">
+                  <span data-feather="users"></span>
+                  Blog Page
+                </a>
+              </li>
              
               <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -113,11 +119,11 @@
             </div>
           </div>
           <div> 
-            <h2>All Profile</h2>
+            <h2>Admin Profile</h2>
             <table class="table table-bordered table-hover">
             <thead class="thead-light">
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
@@ -131,6 +137,7 @@
             </tfoot>
             <tbody>
             <?php foreach ($users as $user) { ?>
+              <?php if($user->role=="admin") {?>
                 <tr>
                     <td><?php echo $user->id; ?></td>
                     <td><?php echo $user->name; ?></td>
@@ -145,13 +152,59 @@
 
                 </tr>
             <?php
-}         ?>
+}
+}     ?>
             </tbody>
         </table>
 
         </div>
         <div> 
             <h2>Users's Profile</h2>
+            <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="3"><?php ?></td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <?php foreach ($users as $user) {
+                ?>
+                <?php if ($user->role=="user") {
+                ?>
+                <?php $act="approve";
+                  $act1='app';
+                if ($user->status=='approve') {
+                     $act1='dis';
+                     $act='dissapprove';
+                }
+         ?>
+                <tr>
+                    <td><?php echo $user->id; ?></td>
+                    <td><?php echo $user->name; ?></td>
+                    <td><?php echo $user->email; ?></td>
+                    <td><?php echo $user->password; ?></td>
+                    <td><?php echo  "<form action='/approve/approve'method='POST'><button name='authenticate' value='".$act1."-".$user->id."'>".$act."</button></form>" ?>
+                    <?php echo $this->tag->linkTo([
+                            'index/delete/'.$user->id,
+                            'Delete', 'class' => 'btn btn-dark'  ]);?></td>
+
+                </tr>
+            <?php
+}
+}     ?>
+            </tbody>
+        </table>
+
+        </div>
           
             
             
@@ -159,9 +212,9 @@
         </div>
         <div>
         </div>
-      <form action='' method='post'>
+      <!-- <form action='' method='post'>
         
-    </form>
+    </form> -->
 
       
 
