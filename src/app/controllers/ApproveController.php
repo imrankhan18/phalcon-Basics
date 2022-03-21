@@ -15,7 +15,7 @@ public function approveAction()
     // print_r($result);
     if (isset($_POST['authenticate'])) {
         $action=$_POST['authenticate'];
-        echo "<h1>".$_POST['authenticate']."</h1>";
+        // echo "<h1>".$_POST['authenticate']."</h1>";
         $userid=substr($action, 4);
         // print( $userid);
         $action=substr($action, 0, 3);
@@ -34,7 +34,7 @@ public function approveAction()
             
         }
       
-      
+        $this->response->redirect('dashboard');
     }
 
 }

@@ -17,6 +17,7 @@ class IndexController extends Controller
         $request = new Request();
         $edit->name=$request->getPost('username');
         $edit->email=$request->getPost('email');
+        $edit->password=$request->getPost('password');
         $edit->update();
         $this->response->redirect('index');
     }
@@ -24,14 +25,38 @@ class IndexController extends Controller
     {
         $user= new Users();
         $user->id=$id;
-        $result= $user->delete();
+        $user->delete();
         $this->response->redirect('index');
-}
-public function approveAction($id)
-{
+    }
+    public function approveAction($id)
+    {
 
-    $approve= Users::findFirstById($id);
+        $approve= Users::findFirstById($id);
     
    
-}
+    }
+    public function editblogAction($blogid)
+    {
+        // echo $blogid;
+        // die();
+
+        $edit= Blogs::findFirst($blogid);
+        // print_r($edit);
+        // die();
+        $request = new Request();
+        $edit->blogname=$request->getPost('blogname');
+        $edit->blogtype=$request->getPost('blogtype');
+        $edit->fullblog=$request->getPost('fullblog');
+        $edit->update();
+        $this->response->redirect('blogpage');
+    }
+        public function deleteblogAction($blogid)
+        {
+            // print_r($blogid) ;
+            // die();
+        $blog= new Blogs();
+        $blog->blogid=$blogid;
+        $result=$blog->delete();
+        $this->response->redirect('blogpage');
+        }
 }

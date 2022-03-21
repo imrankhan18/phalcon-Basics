@@ -1,50 +1,90 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 style="text-align:center">BLOG HOME</h1>
-    <div style="text-align:center">
-   <a href="dashboard"><h1 class="btn btn-primary">BLOG HOME</h1></a>
-  </div>
-  <?php foreach ($blogs as $blog) { ?>
-    <form action='' method='post'><div class='row'>
-    
-            <div class='card shadow-sm col-4 '>
-            <strong>Blog Pic:</strong>
-            <?php echo $blog->pic ?>
 
-                <img src='../../../public/nathan-da-silva-k-rKfqSm4L4-unsplash (1).jpg' alt='pic' width=''  height=''>
-                <div></div>
-              <div class='card-body '>
-              
-                  <strong>Blog Name:</strong>
-                  
-                  <?php echo $blog->blogname ?>
-                <p class='card-text'><strong>Type:</strong>
-                <?php echo $blog->blogtype ?>
-              </p>
-                
-                <p><strong>Blog Text:</strong>
-                <?php echo $blog->fullblog ?>
-              </p>
-                <div class='d-flex justify-content-between align-items-center'>
-                <p><strong></strong>&nbsp;</p></a>
-                  <button class='btn btn-primary' name='cart' value='' >Edit</button>
-                </div>
-              </div>
-              
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1 style="text-align:center">BLOG HOME</h1>
+  <div style="text-align:center">
+    <a href="dashboard">
+      <h1 class="btn btn-primary">BLOG HOME</h1>
+    </a>
+  </div>
+  <?php foreach ($page->getItems() as $blog) {
+    ?>
+    <form action='' method='post'>
+
+    <div class='col'>
+        <div class='card shadow-sm col-8 '>
+          <div class='card-body'>
+            <p><strong>Blog Pic:</strong>
             
+                <?php echo '<td><img class="img-responsive center-block" 
+               src="../../../public/images/'.$blog['pic'].'">
+              </td>
+            </p>';
+            ?>
+
+            <strong>Blog Name:</strong>
+
+            <?php echo $blog['blogname'] ?>
+            <p class='card-text'><strong>Type:</strong>
+                <?php echo $blog['blogtype'] ?>
+            </p>
+
+            <p><strong>Blog Text:</strong>
+                <?php echo $blog['fullblog'] ?>
+            </p>
+            <div class='d-flex justify-content-between align-items-center'>
+              <td><?php echo $this->tag->linkTo([
+                            'editblog/editblog/'.$blog['blogid'],
+                            'Edit', 'class' => 'btn btn-primary' ]);?>
+                  <?php echo $this->tag->linkTo([
+                            'index/deleteblog/'.$blog['blogid'],
+                            'Delete', 'class' => 'btn btn-danger' ]);?></td>
+            </div>
           </div>
-          <?php }?>
-        </form>
-       
+
+        </div>
+
+      </div>
+      
+    </form>
+    
+    <?php
+}
+    ?>
+     <ul class="pagination">
+    <?php
         
+    // $page;
+    // print_r($page);
+    // die();
+    $last=$page->getLast();
+    $dsp='';
+    if ($page->getCurrent()!=1) {
+        $dsp.="<li class='page-item'><a class='page-link' href='/blogpage/index?page=".$page->getPrevious()."'>Previos</a></li>";
+    }
+    for ($i=1; $i<=$last; $i++) {
+                $dsp.="<li class='page-item'><a class='page-link' href='/blogpage/index?page=".$i."'>".$i."</a></li>";
+    }
+    if ($page->getCurrent()!=$page->getLast()) {
+            $dsp.="<li class='page-item'><a class='page-link' href='/blogpage/index?page=".$page->getNext()."'>Next</a></li>";
+    }
+        
+            echo $dsp;
+    ?>
+</ul>
+  
+ 
+
+
+
 </body>
+
 </html>

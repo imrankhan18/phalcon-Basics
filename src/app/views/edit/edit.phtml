@@ -6,12 +6,15 @@
 
 <h2>Edit Details</h2>
     <p>
-        <label for="email">E-Mail</label>
-        <?php echo $this->tag->textField('username'); ?>
+        <label for="email">Name:</label>
+        <?php echo $this->tag->textField('username'); ?> 
+        <label for="password">Email:</label>
+        <?php echo $this->tag->textField('email'); ?>
+        <label for="password">Password:</label>
+        <?php echo $this->tag->passwordField('password'); ?>
     </p>
     <p>
-        <label for="password">Password</label>
-        <?php echo $this->tag->passwordField('email'); ?>
+       
     </p>
 
     <p>
