@@ -1,8 +1,6 @@
-<?php 
+<?php
 
-// use namespace;
 
-// use App;
 
 use Phalcon\Mvc\Controller;
 
@@ -20,17 +18,18 @@ class BlogpageController extends Controller
     {
         $blogs = new Blogs();
         $blogs->assign(
-            $this->request->getPost(), [ 'pic',
-            'blogname',
-            'blogtype',
-            'fullblog']
+            $this->request->getPost(),
+            [
+                'pic',
+                'blogname',
+                'blogtype',
+                'fullblog'
+            ]
         );
         $blogs->save();
         $this->fetchBlogAction();
         // die();
         $this->response->redirect('blogpage');
-        
-
     }
     public function fetchBlogAction()
     {
@@ -42,22 +41,21 @@ class BlogpageController extends Controller
     }
     public function listAction()
     {
-            // $this->indexAction();
-            // $this->view->blogs = Blogs::find();
-            $currentPage = $this->request->getQuery('page', 'int', 1);
-            $paginator   = new PaginatorModel(
-                [
-                    'model'  => Blogs::class,
-                    'limit' => 2,
-                    'page'  => $currentPage,
-                ]
-            );
-            
-            $page = $paginator->paginate();
-            // print_r($page);
-            // die();
-            
-            $this->view->setVar('page', $page);
-        
-}
+        // $this->indexAction();
+        // $this->view->blogs = Blogs::find();
+        $currentPage = $this->request->getQuery('page', 'int', 1);
+        $paginator   = new PaginatorModel(
+            [
+                'model'  => Blogs::class,
+                'limit' => 2,
+                'page'  => $currentPage,
+            ]
+        );
+
+        $page = $paginator->paginate();
+        // print_r($page);
+        // die();
+
+        $this->view->setVar('page', $page);
+    }
 }

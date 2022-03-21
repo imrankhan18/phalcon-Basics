@@ -41,10 +41,10 @@
                 <?php echo $blog['fullblog'] ?>
             </p>
             <div class='d-flex justify-content-between align-items-center'>
-              <td><?php echo $this->tag->linkTo([
+              <td>  <?php echo $this->tag->linkTo([
                             'editblog/editblog/'.$blog['blogid'],
                             'Edit', 'class' => 'btn btn-primary' ]);?>
-                  <?php echo $this->tag->linkTo([
+                    <?php echo $this->tag->linkTo([
                             'index/deleteblog/'.$blog['blogid'],
                             'Delete', 'class' => 'btn btn-danger' ]);?></td>
             </div>

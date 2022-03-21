@@ -168,6 +168,7 @@
                 <th>Email</th>
                 <th>Password</th>
                 <th>Action</th>
+                <th>Operation</th>
             </tr>
             </thead>
             <tfoot>
@@ -192,8 +193,11 @@
                     <td><?php echo $user->name; ?></td>
                     <td><?php echo $user->email; ?></td>
                     <td><?php echo $user->password; ?></td>
-                    <td><?php echo  "<form action='/approve/approve'method='POST'><button name='authenticate' value='".$act1."-".$user->id."'>".$act."</button></form>" ?>
-                    <?php echo $this->tag->linkTo([
+                    <td><?php echo  "<form action='/approve/approve'method='POST'><button name='authenticate' value='".$act1."-".$user->id."'>".$act."</button></form>" ?></td>
+                    <td><?php echo $this->tag->linkTo([
+                            'edit/edit/'.$user->id,
+                            'Edit', 'class' => 'btn btn-primary' ]);?>
+                            <?php echo $this->tag->linkTo([
                             'index/delete/'.$user->id,
                             'Delete', 'class' => 'btn btn-dark'  ]);?></td>
 
